@@ -1,7 +1,11 @@
 
-<form [formGroup]="l_loginform">
+<form [formGroup]="l_loginform" (ngSubmit)="lFN_Login()">
     <input type="text" formControlName="name" placeholder="Login Id">
+    <div *ngIf="lFN_GetFormDetails('name')?.touched && lFN_GetFormDetails('name')?.invalid">Please enter valid name</div>
     <input type="password" formControlName="password" placeholder="Password">
-    <button class="bg-blue-600 text-white px-4 py-2 rounded"
-     (click)="lFN_Login()">Login</button>
+    <div *ngIf="lFN_GetFormDetails('password')?.touched && lFN_GetFormDetails('password')?.invalid">Please enter valid email</div>
+    <button class="bg-blue-600 text-white px-4 py-2 rounded">Login</button>
 </form>
+
+<p>Login name: {{ l_loginform.get('name')?.value }}</p>
+<p>Login password: {{ l_loginform.get('password')?.value }}</p>
