@@ -1,0 +1,29 @@
+<div
+  class="bg-white border-r h-full transition-all duration-300 overflow-hidden"
+  [class.w-64]="!l_IsCollapsed()"
+  [class.w-20]="l_IsCollapsed()"
+>
+  <button
+    class="p-2 text-sm text-blue-600 w-full text-left"
+    (click)="lFN_ToggleSideBar()"
+  >
+    Toggle
+  </button>
+
+  <ul class="mt-4 space-y-2">
+    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+      <span class="material-icons">dashboard</span>
+      <span [class.hidden]="l_IsCollapsed()">Dashboard</span>
+    </li>
+
+    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+      <span class="material-icons">people</span>
+      <span [class.hidden]="l_IsCollapsed()">Users</span>
+    </li>
+
+    <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+      <span class="material-icons">bar_chart</span>
+      <span [class.hidden]="l_IsCollapsed()">Reports</span>
+    </li>
+  </ul>
+</div>
