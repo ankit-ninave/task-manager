@@ -23,7 +23,7 @@ export class LoginComponent {
     private l_FormBuilder: FormBuilder
   ) {
     this.l_loginform = this.l_FormBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      email: new FormControl('', [Validators.required, Validators.minLength(2)]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
   }
@@ -33,11 +33,11 @@ export class LoginComponent {
       this.l_loginform.markAllAsTouched();
       return;
     }
-    const { name, password } = this.l_loginform.value;
+    const { email, password } = this.l_loginform.value;
     //this.l_RouterService.navigate(['/'])
 
 
-    this.l_AuthService.lFN_login(name, password).subscribe(({
+    this.l_AuthService.lFN_login(email, password).subscribe(({
       next:(res)=>{
       console.warn('Login success', res);
       this.l_RouterService.navigate(['/']);
