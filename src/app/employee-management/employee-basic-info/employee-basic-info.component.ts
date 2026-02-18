@@ -10,20 +10,21 @@ export class EmployeeBasicInfoComponent implements OnInit {
 
   employeeForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
-      firstName: ['', Validators.required],   // mandatory
-      lastName: ['', Validators.required],    // mandatory
-      email: ['', [Validators.required, Validators.email]], // mandatory + email format
+      firstName: ['', Validators.required,Validators.minLength(2)],   // mandatory
+      lastName: ['', Validators.required,Validators.minLength(2)],    // mandatory
+      email: ['', [Validators.required,Validators.minLength(10), Validators.email]], // mandatory + email format
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]], // mandatory + 10 digits
-      department: ['', Validators.required],
-      designation: ['', Validators.required]
+      department: ['', Validators.required,Validators.minLength(2)],
+      designation: ['', Validators.required,Validators.minLength(5)]
     });
   }
 
   onSubmit(): void {
+    console.log('Employee Data:', this.employeeForm.value);
     if (this.employeeForm.valid) {
       console.log('Employee Data:', this.employeeForm.value);
       // here you can call API to save the employee

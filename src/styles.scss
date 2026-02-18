@@ -3,3 +3,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.snackbar-success {
+  background-color: #4caf50 !important;
+  color: white !important;
+  z-index: 10000 !important;
+}
+.snackbar-error {
+  background-color: #f44336;  /* red */
+  color: white;
+}
+.snackbar-info {
+  background-color: #2196f3;  /* blue */
+  color: white;
+}
+
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* make sure it’s above everything */
+}

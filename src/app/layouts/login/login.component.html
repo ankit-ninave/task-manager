@@ -1,5 +1,5 @@
 
-<form [formGroup]="l_loginform" (ngSubmit)="lFN_Login()">
+<form [formGroup]="loginForm" (ngSubmit)="lFN_Login()">
     <input type="text" formControlName="email" placeholder="Login Id">
     <div *ngIf="lFN_GetFormDetails('email')?.touched && lFN_GetFormDetails('email')?.invalid">Please enter valid email</div>
     <input type="password" formControlName="password" placeholder="Password">
@@ -7,6 +7,6 @@
     <button class="bg-blue-600 text-white px-4 py-2 rounded">Login</button>
 </form>
 
-<p>Login name: {{ l_loginform.get('name')?.value }}</p>
-<p>Login password: {{ l_loginform.get('password')?.value }}</p>
+<p>Login name: {{ loginForm.get('name')?.value }}</p>
+<p>Login password: {{ loginForm.get('password')?.value }}</p>
 <!-- https://fakeapi.platzi.com/en/rest/auth-jwt/ -->

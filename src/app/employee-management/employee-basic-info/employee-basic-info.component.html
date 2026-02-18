@@ -45,7 +45,7 @@
       <input
         formControlName="phone"
         class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="1234567890"
+        placeholder="+911234567890"
       />
       <p *ngIf="employeeForm.get('phone')?.touched && employeeForm.get('phone')?.invalid" class="text-red-500 text-sm mt-1">
         <span *ngIf="employeeForm.get('phone')?.errors?.['required']">Phone is required</span>
@@ -80,6 +80,7 @@
     <div class="text-center mt-6">
       <button
         type="submit"
+        [disabled]="employeeForm.invalid || employeeForm.pristine"
         class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
       >
         Save Employee

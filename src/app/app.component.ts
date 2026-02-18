@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterOutlet } from '@angular/router';
+import { LoaderComponent } from "./shared/components/loader/loader.component";
+import { CoreModule } from './core/core.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterOutlet,HttpClientModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterOutlet, MatSnackBarModule, LoaderComponent,CoreModule,MatProgressSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -1,0 +1,163 @@
+src/
+ └── app/
+      ├── core/
+      │    ├── interceptors/
+      │    │    ├── loader.interceptor.ts
+      │    │    └── error.interceptor.ts
+      │    ├── services/
+      │    │    ├── api.service.ts
+      │    │    ├── auth.service.ts
+      │    │    └── ui.service.ts    <-- handles loader & notifications
+      │    ├── guards/
+      │    │    └── auth.guard.ts
+      │    └── core.module.ts
+      │
+      ├── shared/
+      │    ├── components/
+      │    │    ├── loader/
+      │    │    ├── error-box/
+      │    │    └── input-text/
+      │    ├── pipes/
+      │    └── directives/
+      │
+      ├── features/
+      │    ├── dashboard/
+      │    ├── employee-management/
+      │    ├── reports/
+      │    └── users/
+      │
+      ├── layouts/
+      │    ├── header/
+      │    ├── sidebar/
+      │    ├── login/
+      │    └── main-layout/
+      │
+      ├── app-routing.module.ts
+      └── app.module.ts
+
+      -------------------------------------------------
+      1️⃣ Project Goals
+
+Make loader, notifications, error handling automatic for all components.
+
+Keep components clean: only handle UI and request data.
+
+Follow modern Angular architecture (CoreModule, SharedModule, Feature Modules).
+
+Avoid manual calls for loader/snackbar in every component.
+
+2️⃣ Core Services and Modules
+
+UiService:
+
+Handles loading$, error$, success$ observables.
+
+Exposes methods: lFN_ShowLoader, lFN_HideLoader, lFN_ShowError, lFN_ShowSuccess.
+
+Components subscribe via async pipe.
+
+AuthService:
+
+Handles login, logout, token storage, refresh token.
+
+Uses BehaviorSubject for access_token.
+
+Calls UiService for success notifications.
+
+ApiService:
+
+Optional service for standard API calls (GET, POST, PUT, DELETE).
+
+3️⃣ Interceptors
+
+LoaderInterceptor:
+
+Automatically shows loader on every HTTP request.
+
+Hides loader when all requests complete.
+
+Fixed Angular 17 issue by using providedIn: 'root' and provideHttpClient(withInterceptorsFromDi()) in bootstrapApplication.
+
+ErrorInterceptor:
+
+Captures HTTP errors globally.
+
+Shows error using UiService (no manual error handling in components).
+
+AuthInterceptor:
+
+Attaches access token to all HTTP requests automatically.
+
+4️⃣ Angular 17 Standalone Bootstrap
+
+Removed HttpClientModule from components — imported only in CoreModule.
+
+Used provideHttpClient(withInterceptorsFromDi()) for interceptors to work in standalone apps.
+
+<app-loader> placed in AppComponent, outside <router-outlet>.
+
+5️⃣ Loader Component
+
+Initial issue: spinner not showing. Causes:
+
+Template class mismatch.
+
+Missing CSS animation.
+
+Overlay not covering full screen.
+
+Final professional loader:
+
+Full-screen overlay with semi-transparent blur.
+
+Animated 4-corner bouncing gradient loader (or optional “super pro SaaS style spinner”).
+
+Shows/hides automatically with UiService.
+
+6️⃣ LoginComponent
+
+Clean and standalone.
+
+No HttpClientModule import.
+
+Login HTTP request triggers loader automatically.
+
+Error and success notifications handled globally — no manual snackbar calls required.
+
+7️⃣ Key Takeaways / Research Areas
+
+Angular 17 standalone bootstrap:
+
+bootstrapApplication, provideHttpClient, withInterceptorsFromDi.
+
+Difference from traditional AppModule + NgModule.
+
+BehaviorSubject for state management:
+
+Track loader, errors, success messages, and tokens globally.
+
+HTTP Interceptors:
+
+Loader, Auth token, error handling.
+
+Order matters if multiple interceptors.
+
+UiService patterns:
+
+Centralized notifications and loader.
+
+Async pipe in templates.
+
+Professional loader design:
+
+CSS animations, overlay blur, fade-in/out.
+
+Keep it lightweight and smooth.
+
+Component architecture:
+
+CoreModule: singleton services + interceptors.
+
+SharedModule: reusable components.
+
+Feature modules: business logic / pages.

@@ -3,13 +3,14 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
-import { AuthinterceptorService } from './authservies/authinterceptor.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AuthInterceptorService } from './authservies/authinterceptor.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),provideHttpClient(), // ✅ Must provide HttpClient for DI
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthinterceptorService,
+      useClass: AuthInterceptorService,
       multi: true
-    }]
+    }, provideAnimationsAsync()]
 };
