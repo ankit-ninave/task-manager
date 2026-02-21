@@ -14,32 +14,33 @@ import { Component } from "@angular/core";
 </div>
   `,
   styles: [`
-/* Full screen overlay */
-.overlay {
-  position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.25);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-/* Super fancy animated loader */
 .loader {
-    width: 40px;
-    height: 40px;
-    --c:no-repeat linear-gradient(orange 0 0);
-    background: var(--c),var(--c),var(--c),var(--c);
-    background-size: 21px 21px;
-    animation: l5 1.5s infinite cubic-bezier(0.3,1,0,1);
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+}
+.loader::before,
+.loader::after {    
+  content:"";
+  grid-area: 1/1;
+  --c:no-repeat radial-gradient(farthest-side,#25b09b 92%,#0000);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 12px 12px;
+  animation: l12 1s infinite;
+}
+.loader::before {
+  margin: 4px;
+  filter: hue-rotate(45deg);
+  background-size: 8px 8px;
+  animation-timing-function: linear
 }
 
-@keyframes l5 {
-   0%   {background-position: 0    0,100% 0   ,100% 100%,0 100%}
-   33%  {background-position: 0    0,100% 0   ,100% 100%,0 100%; width:60px; height:60px}
-   66%  {background-position: 100% 0,100% 100%,0    100%,0 0   ; width:60px; height:60px}
-   100% {background-position: 100% 0,100% 100%,0    100%,0 0   }
+@keyframes l12 { 
+  100%{transform: rotate(.5turn)}
 }
   `]
 })

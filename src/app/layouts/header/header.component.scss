@@ -1,0 +1,6 @@
+.material-icons {
+  transition: transform 0.3s ease;
+}
+button:hover .material-icons {
+  transform: rotate(20deg);
+}

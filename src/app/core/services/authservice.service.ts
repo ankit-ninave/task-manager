@@ -32,8 +32,6 @@ export class AuthService {
         sessionStorage.setItem('access_token', res.access_token);
         sessionStorage.setItem('login_time', Date.now().toString());
         this.accessToken$.next(res.access_token);
-
-        // optional success notification
         this.ui.lFN_ShowSuccess('Login successful');
       })
     );

@@ -1,14 +1,35 @@
-<header class="bg-white border-b px-6 py-4 flex justify-between items-center shadow-sm">
-  <!-- App Name -->
-  <h1 class="font-bold text-xl text-gray-800">ProManage</h1>
+<header class="bg-white dark:bg-gray-900
+               border-b border-gray-200 dark:border-gray-700
+               px-6 py-4 flex justify-between items-center shadow-sm">
 
-  <!-- User Info & Logout -->
+  <h1 class="font-bold text-xl text-gray-800 dark:text-white">
+    ProManage
+  </h1>
+
   <div class="flex items-center space-x-4">
-    <span class="text-gray-600 text-sm">Welcome, userName</span>
-    <button 
-      (click)="lFN_Logout()" 
-      class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors text-sm">
+    <span class="text-gray-600 dark:text-gray-300 text-sm">
+      Welcome, userName
+    </span>
+
+    <button
+  (click)="lFN_ToggleTheme()"
+  class="flex items-center justify-center w-10 h-10 rounded-full 
+         bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200
+         hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+  title="Toggle Dark Mode"
+>
+  <span *ngIf="!l_ThemeService.lFN_IsDarkMode()" class="material-icons">
+    dark_mode
+  </span>
+  <span *ngIf="l_ThemeService.lFN_IsDarkMode()" class="material-icons">
+    light_mode
+  </span>
+</button>
+
+    <button (click)="lFN_Logout()"
+            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors text-sm">
       Logout
     </button>
   </div>
+
 </header>

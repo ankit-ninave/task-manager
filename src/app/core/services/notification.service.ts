@@ -15,7 +15,7 @@ export class GNotificationService {
     });
   }
 
-  lFN_ShowError(message: string, duration = 5000) {
+  lFN_ShowError(message: string, duration = 3000) {
     this.snackBar.open(message, '✖', {
       duration,
       panelClass: ['snackbar-error'],
@@ -26,6 +26,13 @@ export class GNotificationService {
     this.snackBar.open(message, 'ℹ', {
       duration,
       panelClass: ['snackbar-info'],
+    });
+  }
+
+   lFN_ShowWarning(message: string, duration = 3000) {
+    this.snackBar.open(message, '!', {
+      duration,
+      panelClass: ['snackbar-warning'],
     });
   }
 }

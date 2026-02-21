@@ -6,17 +6,16 @@ import { finalize, Observable } from "rxjs";
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
   private requests = 0;
-  constructor(private ui: UiService) {}
+  constructor(private l_UiService: UiService  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      console.warn('LoaderInterceptor triggered for:', req.url); // <--- debug
-
     this.requests++;
-    this.ui.lFN_ShowLoader();
+    this.l_UiService?.lFN_ShowLoader();
     return next.handle(req).pipe(
       finalize(() => {
+        console.warn('requests out ',this.requests);
         this.requests--;
-        if (this.requests === 0) this.ui.lFN_HideLoader();
+        if (this.requests === 0) this.l_UiService.lFN_HideLoader();
       })
     );
   }
